@@ -1,4 +1,4 @@
-# ICANSII_PyTact
+# PyTact
 
 PyTact is a python library for BeHaptic `.tact` manipulation.
 
