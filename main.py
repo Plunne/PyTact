@@ -1,11 +1,12 @@
 # main.py
 
 import asyncio
+import sys
 
 from pytact.frame import *
 from pytact.modes import *
 
-if __name__ == "__main__":
+def main():
 
     print("\n***** TACT VEST *****\n")
 
@@ -13,14 +14,19 @@ if __name__ == "__main__":
     pointsList = []
 
     # Get points in ".tact" file
-    # tact_file("tactdroite.tact", pointsList)
-    tact_file("tactcircle.tact", pointsList)
+    for arg in sys.argv[1:]:        # Pour chaque arguments en commencant par le 2eme
+        tact_file(arg + ".tact", pointsList)
 
     # Sort point list by earlier
     pointsList.sort(key=lambda x: x.startTime)
     
-    # Send Frames
+    # Prepare frames
     timedFrames = preComputeFrames(pointsList)
+
+    # Send Frames
     asyncio.run(playFrames(timedFrames))
+
+if __name__ == "__main__":
+    main()
 
 # End of Main
